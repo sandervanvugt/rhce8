@@ -1,0 +1,13 @@
+---
+- name: setup cron job
+  hosts: file
+  tasks: 
+    - name: run a cron job
+      cron:
+        name: write message to file
+        minute: "*/2"
+        hour: 8-18
+        user: ansible
+        job: echo "entry written at $(date)" >> /tmp/cron-keepalive
+        cron_file: keep-alive-messages
+        state: present

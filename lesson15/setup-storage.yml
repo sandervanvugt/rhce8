@@ -1,0 +1,39 @@
+---
+- name: configure Apache storage configuration
+  hosts: lamp
+  vars_files:
+    - vars/storage.yml
+  tasks:
+    - name: verify partition existence
+      parted:
+        device: /dev/sdb
+        state: present
+        number: "{{ item.number }}"
+        part_start: "{{ item.start }}"
+        part_end: "{{ item.end }}"
+      loop: "{{ partitions }}"
+    - name: verify VG existence
+      lvg:
+        vg: "{{ item.name }}"
+        pvs: "{{ item.devices }}"
+      loop: "{{ vgs }}"
+    - name: create LVs if needed
+      lvol:
+        vg: "{{ item.vgroup }}"
+        lv: "{{ item.name }}"
+        size: "{{ item.size }}"
+      loop: "{{ lvs }}"
+      when: item.name not in ansible_lvm["lvs"] 
+    - name: verify XFS filesystem on each LV
+      filesystem:
+        dev: "/dev/{{ item.vgroup }}/{{ item.name }}"
+        fstype: xfs
+      loop: "{{ lvs }}"
+    - name: mount LVs
+      mount:
+        path: "{{ item.path }}"
+        src: "/dev/{{ item.vgroup }}/{{ item.name }}"
+        fstype: xfs
+        state: mounted
+      loop: "{{ lvs }}"
+

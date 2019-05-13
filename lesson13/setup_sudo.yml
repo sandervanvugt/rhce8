@@ -1,0 +1,12 @@
+---
+- name: configure sudo
+  hosts: nodes
+  vars_files:
+    - vars/defaults
+  tasks:
+  - name: allow group members in sudo
+    template:
+      src: sudoers.j2
+      dest: /etc/sudoers.d/sudogroups
+      validate: 'visudo -cf %s'
+      mode: 0440

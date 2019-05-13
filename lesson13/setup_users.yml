@@ -1,0 +1,38 @@
+---
+- name: create some users
+  hosts: file
+  vars_files:
+    - vars/users
+    - vars/groups
+  tasks:
+  - name: add groups
+    group:
+      name: "{{ item.groupname }}"
+    loop: "{{ usergroups }}"
+  - name: add users
+    user:
+      name: "{{ item.username }}"
+      groups: "{{ item.groups }}"
+    loop: "{{ users }}"
+  - name: add SSH public keys
+    authorized_key:
+      user: "{{ item.username }}"
+      key: "{{ lookup('file', 'files/'+ item.username + '/id_rsa.pub') }}"
+    loop: "{{ users }}"
+  - name: add sales group members to sudo
+    copy:
+      content: "%sales ALL=(ALL) NOPASSWD: ALL"
+      dest: /etc/sudoers.d/sales
+      mode: 0440
+  - name: disable root SSH login
+    lineinfile:
+      dest: /etc/ssh/sshd_config
+      regexp: "^PermitRootLogin"
+      line: "PermitRootLogin no"
+    notify: restart sshd
+
+  handlers:
+  - name: restart sshd 
+    service:
+      name: sshd
+      state: restarted

@@ -1,0 +1,9 @@
+---
+- name: remove a specific cron job
+  hosts: lamp
+  tasks:
+    - name: remove cron job
+      cron: 
+        name:  write message to file
+        cron_file: keep-alive-messages
+        state: absent

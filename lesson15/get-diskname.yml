@@ -1,0 +1,13 @@
+---
+- name: check device names
+  hosts: all
+  tasks:
+  - name: get device name
+    set_fact:
+      device_name: "{{ item.key }}"
+    no_log: true
+    with_dict: "{{ ansible_devices }}"
+  - name: show  all values for the device name
+    debug: var=ansible_devices[device_name]
+  - name: show only device name
+    debug: var=device_name

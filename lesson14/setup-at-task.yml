@@ -1,0 +1,12 @@
+---
+- name: run an at task
+  hosts: lamp
+  
+  tasks:
+    - name: create my at file
+      at:
+        command: "date > /tmp/my-at-file"
+        count: 1
+        units: minutes
+        unique: yes
+        state: present

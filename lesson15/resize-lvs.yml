@@ -1,0 +1,11 @@
+- name: resize LVs if size is not right
+  hosts: all
+  tasks:
+    - name: set correct capacity
+      lvol:
+        vg: "{{ item.vgroup }}"
+        lv: "{{ item.name }}"
+        size: "{{ item.size }}"
+        resizefs: yes
+        force: yes
+      loop: "{{ logical_volumes }}"
