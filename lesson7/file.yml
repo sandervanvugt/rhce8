@@ -1,0 +1,11 @@
+---
+- name: create a file
+  hosts: all
+  tasks:
+    - name: create a file
+      file: 
+        path: /tmp/removeme
+        owner: ansible
+        mode: 0640
+        state: touch
+        setype: public_content_rw_t

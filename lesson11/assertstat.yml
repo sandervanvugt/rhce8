@@ -1,0 +1,11 @@
+---
+- name: sample of stat and assert
+  hosts: ansible2.example.com
+  tasks:
+  - name: stat a directory
+    stat:
+      path: /etc
+    register: sta
+  - name: assert that /etc is a directory
+    assert:
+      that: sta.stat.isdir

@@ -1,0 +1,17 @@
+- name: using blocks
+  hosts: all
+  tasks:
+    - name: intended to fail
+      block:
+        - name: remove a file
+          shell:
+            cmd: /usr/bin/rm /proc/meminfo
+      rescue:
+        - name: create a file
+          shell:
+            cmd: /usr/bin/touch /tmp/rescuefile
+      always:
+        - name: always write a message to logs
+          shell:
+            cmd: /usr/bin/logger hello
+

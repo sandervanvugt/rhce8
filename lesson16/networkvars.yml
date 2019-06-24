@@ -1,0 +1,9 @@
+---
+network_provider: nm
+network_connections: 
+  - name: ens33
+    type: ethernet
+    ip:
+      address:
+        - 192.168.4.231/24
+    zone: external

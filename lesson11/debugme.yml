@@ -1,0 +1,13 @@
+---
+- name: show how debug works
+  hosts: all
+  vars:
+    user: linda
+  tasks:
+  - name: show value of a fact
+    debug: 
+      msg: this system has {{ ansible_facts['memfree_mb'] }} available ram
+  - name: FIXME show a custom variable
+    debug: 
+      var: user
+      verbosity: 2

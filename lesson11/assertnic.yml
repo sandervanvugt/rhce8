@@ -1,0 +1,19 @@
+---
+- name: test assert
+  hosts: ansible2.example.com
+  tasks:
+  - name: test assert
+    assert:
+      that:
+        - ansible_ens34 is defined
+      msg: bad luck dude
+  - name: print text is assert did not fail
+    debug:
+      msg: ens33 exists
+
+- name: second play
+  hosts: ansible2.example.com
+  tasks:
+  - name: placeholder
+    debug:
+      msg: this is part 2

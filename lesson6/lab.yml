@@ -1,0 +1,29 @@
+---
+- name: database server is running
+  hosts: lamp-prod
+  vars:
+    database_packages:
+      - mariadb-server
+      - python3-PyMySQL
+
+  tasks: 
+    - name: mariadb packages are installed
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ database_packages }}"
+      when: ansible_distribution == "RedHat" and ansible_distribution_major_version == "8"
+    - name: start the db service
+      service: 
+        name: mariadb
+        state: started
+        enabled: true
+      notify:
+        - set db password
+
+  handlers:
+    - name: set db password
+      mysql_user:
+        name: root
+        password: password
+
