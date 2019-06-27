@@ -8,7 +8,7 @@ ansible1.example.com
 ansible1.example.com
 ansible2.example.com
 
-[nodes:children]
+[servers:children]
 lamp-test
 lamp-prod
 

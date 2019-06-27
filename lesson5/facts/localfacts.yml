@@ -15,3 +15,13 @@
         src: "{{ facts_file }}"
         dest: "{{ remote_dir }}"
 
+- name: install and start
+  hosts: lamp
+  tasks:
+    - name: install 
+      yum:
+        name: "{{ ansible_local.localfacts.localfacts.package }}"
+    - name: start 
+      service:
+        name: "{{ ansible_local.localfacts.localfacts.service }}"
+        state: started

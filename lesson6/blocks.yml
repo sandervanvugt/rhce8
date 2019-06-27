@@ -5,10 +5,10 @@
       block:
       - name: installing http
         yum:
-          name: http
+          name: httpd
           state: present
       - name: restart httpd
         service:
           name: httpd
           state: started
-      when: ansible_distribution == "CentOS"
+      when: ansible_distribution == "RedHat"

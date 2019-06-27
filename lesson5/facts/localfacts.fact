@@ -1,4 +1,4 @@
 [localfacts]
-package = vsftpd
-service = vsftpd
+package = samba
+service = smb
 state = enabled

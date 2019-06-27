@@ -23,6 +23,7 @@
         lv: "{{ item.name }}"
         size: "{{ item.size }}"
       loop: "{{ lvs }}"
+      when: item.name not in ansible_lvm["lvs"]
     - name: verify XFS filesystem on each LV
       debug: 
         msg: TODO

@@ -7,6 +7,9 @@
     write_enable: yes
     anon_upload_enable: yes
   tasks:
+  - name: install vsftpd
+    yum:
+      name: vsftpd
   - name: use template to copy FTP config
     template:
       src: vsftpd.j2

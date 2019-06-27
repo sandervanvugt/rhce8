@@ -1,0 +1,7 @@
+---
+network_connections:
+- name: ens224
+  type: ethernet
+  ip:
+    address:
+      - 192.168.4.30/24

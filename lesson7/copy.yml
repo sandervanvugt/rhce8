@@ -23,4 +23,4 @@
   - name: fetch a file
     fetch:
       src: /tmp/hosts
-      dest: "my.hosts"
+      dest: /tmp/

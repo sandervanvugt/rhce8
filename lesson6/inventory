@@ -1,16 +1,17 @@
-control.example.com
 ansible1.example.com
 ansible2.example.com
+ansible5.example.com
 
-[lamp-test]
+[lamp_test]
 ansible1.example.com
 
-[lamp-prod]
+[lamp_prod]
 ansible1.example.com
 ansible2.example.com
+ansible5.example.com
 
 [nodes:children]
-lamp-test
-lamp-prod
+lamp_test
+lamp_prod
 
 

@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: BSD-3-Clause
+---
+- hosts: ansible2.example.com
+  vars:
+    network_connections:
+
+      # Create one ethernet profile and activate it.
+      # The profile uses automatic IP addressing
+      # and is tied to the interface by MAC address.
+      - name: prod1
+        state: up
+        type: ethernet
+        autoconnect: yes
+        mac: 00:0c:29:9a:49:8a
+        mtu: 1450
+
+  roles:
+    - rhel-system-roles.network

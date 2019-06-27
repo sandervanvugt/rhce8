@@ -1,0 +1,11 @@
+---
+# tasks file for ssh-setup
+- name: copy sshd_config file
+  template:
+    src: templates/sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0444
+    force: yes
+  notify: restart sshd

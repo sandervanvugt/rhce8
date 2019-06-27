@@ -1,0 +1,7 @@
+ansible3.example.com
+
+[web]
+ansible1.example.com
+
+[db]
+ansible2.example.com

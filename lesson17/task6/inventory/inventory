@@ -1,0 +1,10 @@
+ansible1.example.com
+
+[webservers]
+ansible2.example.com
+
+[proxyservers]
+proxy.example.com
+
+[dockerhost]
+docker.example.com

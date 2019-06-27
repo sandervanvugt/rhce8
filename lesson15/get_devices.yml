@@ -1,0 +1,17 @@
+---
+- name: get storage devices
+  hosts: ansible4.example.com
+  tasks:
+
+    - name: get device name
+      set_fact:
+        device_name: "{{ item.key }}"
+      no_log: False
+      with_dict: "{{ ansible_devices }}"
+      when: "item.value.host.startswith('SCSI')"
+
+    - name: show all values for selected device name
+      debug: var=ansible_devices[device_name]
+
+    - name: show only device name
+      debug: var=device_name

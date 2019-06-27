@@ -3,13 +3,13 @@
   hosts: all
   vars:
     supported_distros:
-      - RedHat
+      - Ubuntu
       - CentOS
       - Fedora
   tasks:
     - name: install RH family specific packages
       yum:
-        name: http
+        name: nginx
         state: present
       when: ansible_distribution in supported_distros 
 

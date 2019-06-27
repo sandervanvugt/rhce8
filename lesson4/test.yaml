@@ -1,0 +1,6 @@
+---
+- name: mytest
+  hosts: all
+  task:
+  - name: task1
+    

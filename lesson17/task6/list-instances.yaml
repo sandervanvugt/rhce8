@@ -1,0 +1,7 @@
+- name: list instances
+  hosts: localhost
+  tasks:
+  - name: find instances
+    ec2_instance_facts:
+      filters:
+        availability-zone: usa-west-2

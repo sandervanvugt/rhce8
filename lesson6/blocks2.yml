@@ -1,11 +1,11 @@
 - name: using blocks
   hosts: all
   tasks:
-    - name: intended to fail
+    - name: intended to be successful
       block:
         - name: remove a file
           shell:
-            cmd: /usr/bin/rm /proc/meminfo
+            cmd: /usr/bin/rm /var/www/html/index.html
       rescue:
         - name: create a file
           shell:

@@ -1,0 +1,23 @@
+- name: create an ubuntu instance on EC2
+  hosts: localhost
+  tasks:
+  - name: get the ubuntu bionic latest AMI
+    ec2_ami_find: 
+      name: "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"
+      aws_access_key: KEYXXXX
+      aws_secret_key: KEYXXXX
+      region: us-west-2
+      sort: name
+      sort_order: descending
+      sort_end: 1
+    register: ubuntu_image
+
+  - name: start the instance
+    ec2:
+      image: "{{ ubuntu_image.results[0].ami_id }}"
+      region: us-west-2
+      aws_access_key: KEYXXXX
+      aws_secret_key: KEYXXXX
+      instance_type: t2.nano
+      key_name: june2018
+      group: all-open
