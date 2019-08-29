@@ -3,14 +3,22 @@
   hosts: all
   vars:
     ssh_port: 2022
-    allowed_users: ansible, root
+    allowed_users: "ansible, root"
     permit_root: no
   tasks: 
     - include_role:
         name: ssh-setup
       when: "ansible_facts['os_family'] == 'RedHat'"
+    - name: install packages
+      yum:
+        name: policycoreutils-python-utils
+      when: "ansible_distribution_major_version == '8'"
+    - name: install packages on RHEL 7
+      yum:
+        name: policycoreutils-python
+      when: "ansible_distribution_major_version == '7'"
     - name: set SELinux port context
-      command: semanage port -a -t sshd_port_t -p tcp 2022
+      command: semanage port -a -t ssh_port_t -p tcp 2022
     - name: open port in firewall
       firewalld:
         port: 2022/tcp

@@ -4,7 +4,7 @@
   tasks: 
     - name: run a cron job
       cron:
-        name: write message to file
+        name: "write message to file"
         minute: "*/2"
         hour: 8-18
         user: ansible

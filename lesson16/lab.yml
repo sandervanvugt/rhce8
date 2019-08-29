@@ -1,5 +1,0 @@
----
-- name: configure NIC
-  hosts: all
-  roles:
-  - rhel-system-roles.network

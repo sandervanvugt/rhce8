@@ -1,7 +1,7 @@
 ---
 network_provider: nm
 network_connections: 
-  - name: ens33
+  - name: ens224
     type: ethernet
     ip:
       address:

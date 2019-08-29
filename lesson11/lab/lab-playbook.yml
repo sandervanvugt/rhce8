@@ -44,14 +44,14 @@
     - name: include the tasks
       include: lab-tasks/file.yml
 
-    - name: open the port for the ftp service
+    - name: open the port for the samba service
       firewalld:
-        service: smb
+        service: samba
         state: enabled
         immediate: true
         permanent: true
 
-    - name: open the port for the smb service
+    - name: open the port for the ftp service
       firewalld:
         service: ftp
         state: enabled

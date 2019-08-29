@@ -24,14 +24,11 @@
     file:
       path: /var/ftp/repo
       state: directory
-  - name: install dnf utils
+  - name: download packages
     yum:
-      name: 
-      - dnf-utils
-      - createrepo
-      state: latest
-  - name: download sample package
-    command: yumdownloader nmap --destdir /var/ftp/repo/
+      name: nmap
+      download_only: yes
+      dowload_dir: /var/ftp/repo
   - name: createrepo
     command: createrepo /var/ftp/repo
 

@@ -1,11 +1,11 @@
 ---
 - name: deploy vsftpd
   hosts: ansible2.example.com
-  variables:
+  vars:
     package: vsfptd
   tasks: 
   - name: install vsftpd
-    yum: {{ package }}
+    yum: "{{ package }}"
   - name: enable vsftpd
     service: name=vsftpd enabled=true
   - name: create readme file

@@ -4,7 +4,7 @@
   tasks:
   - name: stat a directory
     stat:
-      path: /etc
+      path: /etc/hosts
     register: sta
   - name: assert that /etc is a directory
     assert:

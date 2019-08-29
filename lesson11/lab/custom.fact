@@ -1,5 +1,5 @@
 [packages]
-smb_package = smb
+smb_package = samba
 ftp_package = vsftpd
 db_package = mariadb-server
 web_package = httpd

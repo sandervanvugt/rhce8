@@ -1,9 +1,10 @@
 ---
 - name: remove a specific cron job
-  hosts: lamp
+  hosts: file
   tasks:
     - name: remove cron job
       cron: 
-        name:  write message to file
+        name:  "write message to file"
         cron_file: keep-alive-messages
         state: absent
+        user: ansible
