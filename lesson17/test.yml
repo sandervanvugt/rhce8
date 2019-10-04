@@ -1,0 +1,7 @@
+---
+- hosts: ansible2.example.com
+  tasks:
+  - name: print facts
+    debug:
+      msg: on /dev/sda you have {{ ansible_facts['devices']['sda']['size'] }} available
+

@@ -1,0 +1,33 @@
+---
+- name: work with package facts
+  hosts: ansible2.example.com
+  tasks:
+  - name: gather rpm facts
+    package_facts:
+      manager: auto
+
+  - name: list packages
+    debug:
+      msg: "{{ ansible_facts.packages }}"
+
+  - name: create destination file
+    file:
+      path: /root/packages.txt
+      state: touch
+
+  - name: query packages from a list
+    block:
+    - name: add line to file
+      lineinfile:
+        path: /root/packages.txt
+        line: "{{ item }}"
+    rescue:
+    - name: other line to file
+      lineinfile:
+        path: /root/packages.txt
+        line: "{{ item }} does not exist"
+    loop: 
+      - kernel={{ ansible_facts.packages['kernel'][0].version }}
+      - bash={{ ansible_facts.packages['bash'][0].version }}
+      - glibc={{ ansible_facts.packages['glibc'][0].version }}
+      - nmap={{ ansible_facts.packages['nmap'][0].version }}

@@ -1,0 +1,15 @@
+---
+- name: test command output
+  hosts: ansible1.example.com
+  tasks:
+    - name: test for VG existence
+      command: vgs myvg
+      register: vgout
+      ignore_errors: True
+    - name: show variable value
+      debug:
+        var: vgout
+    - name: print message
+      debug:
+        msg: vg does not exist
+      when: "'not found' in vgout.stderr"

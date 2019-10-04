@@ -1,0 +1,25 @@
+---
+- name: work with package facts
+  hosts: ansible2.example.com
+  tasks:
+  - name: gather rpm facts
+    package_facts:
+      manager: auto
+
+  - name: list packages
+    debug:
+      msg: "{{ ansible_facts.packages }}"
+
+  - name: create destination file
+    file:
+      path: /root/packages.txt
+      state: touch
+
+  - name: query packages from a list
+    lineinfile:
+      path: /root/packages.txt
+      line: kernel="{{ ansible_facts.packages['kernel'][0].version }}"
+    loop: 
+      - kernel
+      - bash
+    when: item in ansible_facts.packages

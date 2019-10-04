@@ -1,14 +1,13 @@
 ---
 - name: show how debug works
   hosts: all
+  vars:
+    user: linda
   tasks:
   - name: show value of a fact
     debug: 
       msg: this system has {{ ansible_facts['memfree_mb'] }} available ram
-  - name: register a result
-    shell: /usr/bin/uptime
-    register: result
-  - name: show result of a registered variable
+  - name: FIXME show a custom variable
     debug: 
-      var: result
-      #verbosity: 2
+      var: user
+      verbosity: 1

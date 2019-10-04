@@ -1,0 +1,22 @@
+---
+- name: setup motd file
+  hosts: all
+  tasks:
+  - name: configure motd
+    template:
+      src: motd.j2
+      dest: /etc/motd
+      owner: root
+      group: root
+      mode: 0644
+  - name: add line for sdb if it exists
+    debug:
+      msg: we have no sdb
+    when: ansible_devices.sdb is not defined
+  - name: check file stats
+    stat:
+      path: /etc/motd
+    register: motd
+  - name: show stat results
+    debug:
+      var: motd

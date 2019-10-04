@@ -1,0 +1,4 @@
+System memory: {{ ansible_facts['memtotal_mb'] }} MiB
+Processor count: {{ ansible_facts['processor_count'] }}
+Primary disk size: {{ ansible_facts['ansible_devices']['sda']['size'] }}
+Secondary disk size: {{ ansible_facts['ansible_devices']['sdb']['size'] | default(NOT_PRESENT) }}

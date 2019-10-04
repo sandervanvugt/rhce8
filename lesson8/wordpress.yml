@@ -1,0 +1,6 @@
+---
+- name: install wordpress using a role
+  hosts: ansible2.example.com
+  
+  roles:
+    - wordpress

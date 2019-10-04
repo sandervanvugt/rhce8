@@ -1,0 +1,36 @@
+--- 
+- name: configure repository
+  hosts: nodes
+  vars:
+    my_package: nmap
+  tasks:
+  - name: get package facts
+    package_facts:
+      manager: auto
+  - name: show package facts for my_package
+    debug:
+      var: ansible_facts.packages[my_package]
+    when: my_package in ansible_facts.packages
+  - name: connect to example repo
+    yum_repository:
+      name: lesson12
+      description: RHCE8 lesson 12 repo
+      file: lesson 12
+      baseurl: ftp://control.example.com/repo/
+      gpgcheck: yes
+      #  - name: install repo GPG key
+      #    rpm_key:
+      #      key: ftp://control.example.com/repo/repo-gpg-key
+      #      state: present
+  - name: install package
+    yum:
+      name: "{{ my_package }}"
+      state: present
+  - name: update package facts
+    package_facts:
+      manager: auto
+  - name: show package facts for my_package
+    debug:
+      var: ansible_facts.packages[my_package]
+    when: my_package in ansible_facts.packages
+

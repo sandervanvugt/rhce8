@@ -1,15 +1,6 @@
 ansible1.example.com
+
+[lamp]
 ansible2.example.com
-
-[lamp-test]
-ansible1.example.com
-
-[lamp-prod]
-ansible1.example.com
-ansible2.example.com
-
-[servers:children]
-lamp-test
-lamp-prod
 
 
