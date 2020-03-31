@@ -1,0 +1,23 @@
+---
+- name: show arrays
+  hosts: ansible1.example.com
+  vars:
+    users:
+      linda:
+        username: linda
+        homedir: /home/linda
+        shell: /bin/bash
+      lisa:
+        username: lisa
+        homedir: /home/lisa
+        shell: /bin/bash
+      anna:
+        username: anna
+        homedir: /home/anna
+        shell: /bin/bash
+  tasks:
+    - name: print array values
+      debug:
+        msg: "User {{ item.username }} has homedirectory {{ item.homedir }} and shell {{ item.shell }}"
+      with_items: "{{ users }}"
+   
