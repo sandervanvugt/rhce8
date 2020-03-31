@@ -1,0 +1,20 @@
+---
+- name: create LVM logical volumes
+  hosts: all
+  tasks:
+  - name: create logical volumes
+    lvol:
+      vg: vgdata
+      size: 2000 MiB
+      ignore_errors: yes
+    when: ansible_devices.sdb is defined
+
+  - name: check if failed because of vgdata absence
+    fail:
+      msg: volume group vgdata doesnt exist
+    when: "'not found' in command_result.stdout"
+
+  - name: check if failed because of insufficient vg space
+    fail:
+      msg: insufficient space in vgdata
+    when: "'insufficient' in command_result.stdout"

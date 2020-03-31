@@ -1,0 +1,18 @@
+---
+- name: show the fail module
+  hosts: all
+  tasks:
+  - name: do somthing impossible
+    lvol:
+      lv: lvnothing
+      vg: vgnothing
+      size: 1G
+    register: command_result
+    ignore_errors: yes
+  - name: show command_result errors
+    debug:
+      var: command_result.err
+  - name: print nice error message after failure
+    fail:
+      msg: volume group doesnt exist
+    when: "'not found' in command_result.err"
