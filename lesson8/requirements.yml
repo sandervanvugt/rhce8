@@ -1,0 +1,7 @@
+collections:
+  - name: f5networks.f5_modules
+    source: https://cloud.redhat.com/api/automation-hub/
+  - name: ansible.netcommon
+    source: https://galaxy.ansible.com
+  - name: ciscosmb
+    source: https://galaxy.ansible.com
